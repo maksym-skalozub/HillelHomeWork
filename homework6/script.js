@@ -37,8 +37,9 @@ function bar1() {
 }
 
 bar1();/* logging the value of the variable (10) that was declared in the start before
-function foo() and dont changed in the end bacause function foo() was initialized fule
-when was created but not when was called */
+function foo() and dont changed in the end bacause function foo() 
+took the external variable from the environment in which it was created, 
+and not in which it was declared*/
 
 //task 4//===============================================================//
 console.log("//task 4//===============================================================//");
@@ -53,8 +54,8 @@ function foo2(){
 b = 30
 
 foo2();
-/* the same idea like in task 3 (function foo2() was initialized fule when
-was created include variabel inside this function)*/
+/* recieve value(20) because function foo2() will 
+first check its lexical environment inside, before checking its outer */
 
 //task 5//===============================================================//
 console.log("//task 5//===============================================================//");
@@ -71,12 +72,18 @@ console.log("//task 6//=========================================================
 function myCounter() {
     let count = 0;
   
-    return function() {
-      return count++;
-    };
+    return {function() {
+      return this.count++;
+    }, count}
   }
 
 let counter = myCounter();
 
-console.log(counter());
-console.log(counter());
+console.log(counter.count);
+console.log(counter.function());
+console.log(counter.count);
+console.log(counter.function());
+console.log(counter.count);
+console.log(counter.function());
+console.log(counter.count);
+console.log(counter.function());
